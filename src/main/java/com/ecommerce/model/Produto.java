@@ -3,27 +3,36 @@ package com.ecommerce.model;
 
 import com.ecommerce.csv.CsvSerializable;
 
+
 public class Produto implements CsvSerializable {
-    private int id;
+    private long id;
     private String nome;
-    private double preco;
+    private float preco;
+    private String codigoBarras;
     private String descricao;
     private String imagemUrl;
     private boolean disponivel;
+    // Métodos
+    public void atualizarDisponibilidade(boolean disponibilidade) {
+        this.disponivel = disponibilidade;
+    }
+
+    // Getters e Setters
 
     public Produto() {
     }
 
-    public Produto(int id, String nome, double preco, String descricao, String imagemUrl, boolean disponivel) {
+    public Produto(long id, String nome, float preco, String codigoBarras, String descricao, String imagemUrl, boolean disponivel) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+        this.codigoBarras = codigoBarras;
         this.descricao = descricao;
         this.imagemUrl = imagemUrl;
         this.disponivel = disponivel;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -31,8 +40,12 @@ public class Produto implements CsvSerializable {
         return nome;
     }
 
-    public double getPreco() {
+    public float getPreco() {
         return preco;
+    }
+
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
     public String getDescricao() {
@@ -42,19 +55,24 @@ public class Produto implements CsvSerializable {
     public String getImagemUrl() {
         return imagemUrl;
     }
+    
+    public String getImagem() {
+        return imagemUrl;
+    }
 
     public boolean isDisponivel() {
         return disponivel;
     }
 
     public static Produto fromCsv(String[] row) {
-        int id = Integer.parseInt(row[0]);
+        long id = Long.parseLong(row[0]);
         String nome = row[1];
-        double preco = Double.parseDouble(row[2]);
-        String descricao = row[3];
-        String imagemUrl = row[4];
-        boolean disponivel = Boolean.parseBoolean(row[5]);
-        return new Produto(id, nome, preco, descricao, imagemUrl, disponivel);
+        float preco = Float.parseFloat(row[2]);
+        String codigoBarras = row.length > 3 ? row[3] : "";
+        String descricao = row.length > 4 ? row[4] : "";
+        String imagemUrl = row.length > 5 ? row[5] : "";
+        boolean disponivel = row.length <= 6 || Boolean.parseBoolean(row[6]);
+        return new Produto(id, nome, preco, codigoBarras, descricao, imagemUrl, disponivel);
     }
 
 
@@ -64,6 +82,7 @@ public class Produto implements CsvSerializable {
                 String.valueOf(id),
                 nome,
                 String.valueOf(preco),
+                codigoBarras,
                 descricao,
                 imagemUrl,
                 String.valueOf(disponivel)
@@ -71,6 +90,6 @@ public class Produto implements CsvSerializable {
     }
 
     public static String[] csvHeader() {
-        return new String[]{"id", "nome", "preco", "descricao", "imagemUrl", "disponivel"};
+        return new String[]{"id", "nome", "preco", "codigoBarras", "descricao", "imagemUrl", "disponivel"};
     }
 }

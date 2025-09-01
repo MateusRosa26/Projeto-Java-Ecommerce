@@ -1,0 +1,142 @@
+### Teste da API REST - E-commerce
+
+### 1. Health Check
+GET http://localhost:8080/api/health
+Content-Type: application/json
+
+###
+
+### 2. Informações da API
+GET http://localhost:8080/api/health/info
+Content-Type: application/json
+
+###
+
+### 3. Listar Produtos
+GET http://localhost:8080/api/products
+Content-Type: application/json
+
+###
+
+### 4. Buscar Produto por ID
+GET http://localhost:8080/api/products/1
+Content-Type: application/json
+
+###
+
+### 5. Criar Novo Produto
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "id": 999,
+  "name": "Produto Teste",
+  "price": 99.99
+}
+
+###
+
+### 6. Adicionar Produto ao Carrinho
+POST http://localhost:8080/api/products/cart/add
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Teclado gamer",
+  "price": 199.9
+}
+
+###
+
+### 7. Buscar Produtos com Filtro
+GET http://localhost:8080/api/products/search?field=nome&filter=teclado&exact=false
+Content-Type: application/json
+
+###
+
+### 8. Registrar Usuário
+POST http://localhost:8080/api/users/register?user=teste&pwd=123456
+Content-Type: application/json
+
+###
+
+### 9. Login de Usuário
+POST http://localhost:8080/api/users/login?user=teste&pwd=123456
+Content-Type: application/json
+
+###
+
+### 10. Criar Endereço para Usuário
+POST http://localhost:8080/api/users/1/address
+Content-Type: application/json
+
+{
+  "rua": "Rua Teste",
+  "numero": "123",
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "complement": "Apto 1",
+  "cep": "01234-567"
+}
+
+###
+
+### 11. Finalizar Pedido
+POST http://localhost:8080/api/orders/finish
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "name": "Teclado gamer",
+    "price": 199.9
+  },
+  {
+    "id": 2,
+    "name": "Mouse óptico",
+    "price": 89.9
+  }
+]
+
+###
+
+### 12. Avaliar Pedido
+POST http://localhost:8080/api/orders/1/evaluate?comment=Ótimo produto!&rating=5
+Content-Type: application/json
+
+###
+
+### 13. Processar Pagamento
+POST http://localhost:8080/api/payments/process?orderId=1
+Content-Type: application/json
+
+###
+
+### 14. Gerar Relatório
+GET http://localhost:8080/api/reports/generate?start=2023-12-01T00:00:00&end=2023-12-31T23:59:59&products=1,2,3
+Content-Type: application/json
+
+###
+
+### 15. Listar Endereços
+GET http://localhost:8080/api/addresses
+Content-Type: application/json
+
+###
+
+### 16. Criar Endereço
+POST http://localhost:8080/api/addresses/user/1
+Content-Type: application/json
+
+{
+  "rua": "Rua Nova",
+  "numero": "456",
+  "bairro": "Vila Nova",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "complement": "Casa",
+  "cep": "04567-890"
+}
+
+###
