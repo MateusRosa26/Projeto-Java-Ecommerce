@@ -3,18 +3,29 @@ package com.ecommerce.model;
 
 import com.ecommerce.csv.CsvSerializable;
 
+import java.util.Date;
+
 public class Produto implements CsvSerializable {
-    private int id;
+    private long id;
     private String nome;
-    private double preco;
+    private float preco;
     private String descricao;
     private String imagemUrl;
     private boolean disponivel;
+    private Date createdAt;
+    private Date updatedAt;
+
+    // Métodos
+    public void atualizarDisponibilidade(boolean disponibilidade) {
+        // Implementação do método para atualizar disponibilidade
+    }
+
+    // Getters e Setters
 
     public Produto() {
     }
 
-    public Produto(int id, String nome, double preco, String descricao, String imagemUrl, boolean disponivel) {
+    public Produto(long id, String nome, float preco, String descricao, String imagemUrl, boolean disponivel) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
@@ -23,7 +34,7 @@ public class Produto implements CsvSerializable {
         this.disponivel = disponivel;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -31,7 +42,7 @@ public class Produto implements CsvSerializable {
         return nome;
     }
 
-    public double getPreco() {
+    public float getPreco() {
         return preco;
     }
 
@@ -48,9 +59,9 @@ public class Produto implements CsvSerializable {
     }
 
     public static Produto fromCsv(String[] row) {
-        int id = Integer.parseInt(row[0]);
+        long id = Long.parseLong(row[0]);
         String nome = row[1];
-        double preco = Double.parseDouble(row[2]);
+        float preco = Float.parseFloat(row[2]);
         String descricao = row[3];
         String imagemUrl = row[4];
         boolean disponivel = Boolean.parseBoolean(row[5]);
