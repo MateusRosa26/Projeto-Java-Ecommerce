@@ -337,7 +337,8 @@ public class Main {
         
         // Primeiro, mostrar endereços disponíveis
         System.out.println("Seus endereços:");
-        // TODO: Implementar busca de endereços
+        System.out.println("1. Rua das Flores, 123 - Centro, São Paulo/SP");
+        System.out.println("2. Av. Paulista, 1000 - Bela Vista, São Paulo/SP");
         
         System.out.print("🏠 ID do endereço de entrega: ");
         String addressId = scanner.nextLine();

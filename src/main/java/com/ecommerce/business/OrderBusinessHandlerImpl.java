@@ -212,7 +212,7 @@ public class OrderBusinessHandlerImpl implements BusinessHandler<OrderDto> {
                 .collect(Collectors.toList());
     }
 
-    public boolean updateOrderStatus(long id, OrderStatus newStatus) {
+    public OrderDto updateOrderStatus(long id, OrderStatus newStatus) {
         List<Pedido> pedidos = pedidoRepository.findAll();
         Pedido pedido = pedidos.stream()
                 .filter(p -> p.getId() == id)
@@ -231,7 +231,7 @@ public class OrderBusinessHandlerImpl implements BusinessHandler<OrderDto> {
         allPedidos.add(pedido);
         pedidoRepository.saveAll(allPedidos);
 
-        return true;
+        return toDto(pedido);
     }
 
     private OrderDto toDto(Pedido pedido) {
