@@ -86,7 +86,7 @@ public class ReportController extends AbstractController<ReportDto> {
     @Override
     public ResponseEntity<ReportDto> get(@PathVariable Long id) {
         // Implementação básica
-        return ResponseEntity.ok(new ReportDto(id, new Date(), new Date(), "1,2,3", 1500.0f));
+        return ResponseEntity.ok(new ReportDto(id, new Date(), new Date(), "1,2,3", 1500.0, 10, 5, List.of(), List.of(), new Date()));
     }
 
     @Override

@@ -1,9 +1,15 @@
 package com.ecommerce.dto;
 
-public record AddressDto(String rua,
+import java.util.Date;
+
+public record AddressDto(Long id,
+                         String rua,
                          String numero,
                          String bairro,
                          String cidade,
                          String estado,
-                         String complement,
-                         String cep) { }
+                         String complemento,
+                         String cep,
+                         Long clienteId,
+                         Date createdAt,
+                         Date updatedAt) { }

@@ -1,12 +1,15 @@
 package com.ecommerce.dto;
 
+import com.ecommerce.enums.PaymentMethod;
+
 import java.util.Date;
 
-public record PaymentDto(String metodo,
+public record PaymentDto(Long id,
+                         Long pedidoId,
+                         PaymentMethod metodoPagamento,
+                         double valor,
                          String status,
+                         String codigoTransacao,
                          Date dataPagamento,
-                         int tentativas,
-                         String nomeCartao,
-                         long numeroCartao,
-                         int mesValidade,
-                         int anoValidade) { }
+                         Date createdAt,
+                         Date updatedAt) { }

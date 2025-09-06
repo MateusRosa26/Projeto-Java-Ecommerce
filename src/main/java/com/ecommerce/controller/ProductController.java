@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller REST para operações de produtos
@@ -81,15 +82,26 @@ public class ProductController extends AbstractController<ProductDto> {
      * Adiciona produto ao carrinho
      * Baseado no diagrama: addToCart(ProductDto product): ResponseEntity<List<ProductDto>>
      */
-    @PostMapping("/cart/add")
-    public ResponseEntity<List<ProductDto>> addToCart(@RequestBody ProductDto product) {
-        if (product != null) {
-            System.out.println("Produto adicionado ao carrinho: " + product.name());
-        } else {
-            System.out.println("Produto nulo - não foi possível adicionar ao carrinho");
+    @PostMapping("/addToCart")
+    public ResponseEntity<String> addToCart(@RequestBody Map<String, Object> request) {
+        try {
+            String productCode = (String) request.get("productCode");
+            Integer quantity = (Integer) request.get("quantity");
+            
+            if (productCode == null || quantity == null || quantity <= 0) {
+                return ResponseEntity.badRequest().body("Código do produto e quantidade são obrigatórios");
+            }
+            
+            ProductDto product = businessHandler.findByBarcode(productCode);
+            if (product == null) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            System.out.println("Produto adicionado ao carrinho: " + product.name() + " - Quantidade: " + quantity);
+            return ResponseEntity.ok("Produto adicionado ao carrinho com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao adicionar produto ao carrinho: " + e.getMessage());
         }
-        List<ProductDto> products = businessHandler.listProducts();
-        return ResponseEntity.ok(products);
     }
 
     /**

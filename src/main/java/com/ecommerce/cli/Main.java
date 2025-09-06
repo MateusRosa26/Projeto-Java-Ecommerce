@@ -61,7 +61,7 @@ public class Main {
         }
     }
 
-    private s'tatic void showLoginMenu() {
+    private static void showLoginMenu() {
         System.out.println("\n=== MENU DE ACESSO ===");
         System.out.println("1. Login");
         System.out.println("2. Cadastro");

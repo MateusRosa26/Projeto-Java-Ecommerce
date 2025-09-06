@@ -1,0 +1,4 @@
+"id","pedidoId","produtoId","clienteId","entregadorId","notaProduto","comentarioProduto","notaEntrega","comentarioEntrega","dataAvaliacao","createdAt","updatedAt"
+"null","1","null","1","","5","Ótimo produto!","0","","2025-09-06 17:34:49","2025-09-06 17:34:49","2025-09-06 17:34:49"
+"null","1","null","1","","5","Ótimo produto!","0","","2025-09-06 17:37:35","2025-09-06 17:37:35","2025-09-06 17:37:35"
+"null","2","null","1","","1","Produto ruim","0","","2025-09-06 17:37:35","2025-09-06 17:37:35","2025-09-06 17:37:35"

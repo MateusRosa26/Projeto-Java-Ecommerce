@@ -1,9 +1,11 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.dto.PaymentDto;
+import com.ecommerce.enums.PaymentMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class PaymentController extends AbstractController<PaymentDto> {
     @PostMapping("/process")
     public ResponseEntity<PaymentDto> processPayment(@RequestParam Long orderId) {
         // Implementação básica - em produção seria mais robusta
-        PaymentDto payment = new PaymentDto("cartao", "processando", null, 0, "Cartão Teste", 1234567890123456L, 12, 2025);
+        PaymentDto payment = new PaymentDto(1L, orderId, PaymentMethod.CARTAO_CREDITO, 100.0, "PROCESSANDO", "TXN123", new Date(), new Date(), new Date());
         return ResponseEntity.ok(payment);
     }
 
@@ -32,7 +34,7 @@ public class PaymentController extends AbstractController<PaymentDto> {
     @PostMapping("/{id}/retry")
     public ResponseEntity<PaymentDto> retryPayment(@PathVariable Long id) {
         // Implementação básica - em produção seria mais robusta
-        PaymentDto payment = new PaymentDto("cartao", "reprocessando", null, 1, "Cartão Teste", 1234567890123456L, 12, 2025);
+        PaymentDto payment = new PaymentDto(id, 1L, PaymentMethod.CARTAO_CREDITO, 100.0, "REPROCESSANDO", "TXN124", new Date(), new Date(), new Date());
         return ResponseEntity.ok(payment);
     }
 
@@ -46,7 +48,7 @@ public class PaymentController extends AbstractController<PaymentDto> {
     @Override
     public ResponseEntity<PaymentDto> get(@PathVariable Long id) {
         // Implementação básica
-        return ResponseEntity.ok(new PaymentDto("cartao", "ativo", null, 0, "Cartão Teste", 1234567890123456L, 12, 2025));
+        return ResponseEntity.ok(new PaymentDto(id, 1L, PaymentMethod.CARTAO_CREDITO, 100.0, "ATIVO", "TXN125", new Date(), new Date(), new Date()));
     }
 
     @Override

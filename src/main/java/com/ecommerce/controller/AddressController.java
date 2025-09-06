@@ -31,7 +31,7 @@ public class AddressController extends AbstractController<AddressDto> {
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<AddressDto>> getAddressesByUser(@PathVariable Long userId) {
         // Implementação básica - em produção seria mais robusta
-        AddressDto address = new AddressDto("Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567");
+        AddressDto address = new AddressDto(1L, "Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567", userId, new java.util.Date(), new java.util.Date());
         return ResponseEntity.ok(List.of(address));
     }
 
@@ -39,14 +39,14 @@ public class AddressController extends AbstractController<AddressDto> {
     @Override
     public ResponseEntity<List<AddressDto>> get() {
         // Implementação básica
-        AddressDto address = new AddressDto("Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567");
+        AddressDto address = new AddressDto(1L, "Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567", 1L, new java.util.Date(), new java.util.Date());
         return ResponseEntity.ok(List.of(address));
     }
 
     @Override
     public ResponseEntity<AddressDto> get(@PathVariable Long id) {
         // Implementação básica
-        return ResponseEntity.ok(new AddressDto("Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567"));
+        return ResponseEntity.ok(new AddressDto(id, "Rua Teste", "123", "Centro", "São Paulo", "SP", "Apto 1", "01234-567", 1L, new java.util.Date(), new java.util.Date()));
     }
 
     @Override

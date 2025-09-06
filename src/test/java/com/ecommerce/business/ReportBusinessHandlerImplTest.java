@@ -1,5 +1,6 @@
 package com.ecommerce.business;
 
+import com.ecommerce.dto.ReportDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,7 +70,7 @@ class ReportBusinessHandlerImplTest {
     void create_ShouldReturnSameObject() {
         Date start = new Date();
         Date end = new Date();
-        var report = new com.ecommerce.dto.ReportDto(1L, start, end, "1,2,3", 1500.0f);
+        var report = new ReportDto(1L, start, end, "1,2,3", 1500.0, 10, 5, new ArrayList<>(), new ArrayList<>(), new Date());
         
         var created = handler.create(report);
         

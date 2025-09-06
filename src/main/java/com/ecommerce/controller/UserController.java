@@ -48,7 +48,7 @@ public class UserController extends AbstractController<UserDto> {
      */
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody UserDto userDto) {
-        UserDto loggedUser = authHandler.login(userDto.username(), userDto.email()); // usando email como senha temporariamente
+        UserDto loggedUser = authHandler.login(userDto.email(), userDto.username()); // usando username como senha temporariamente
         if (loggedUser != null) {
             return ResponseEntity.ok(loggedUser);
         }
@@ -86,7 +86,7 @@ public class UserController extends AbstractController<UserDto> {
     @Override
     public ResponseEntity<UserDto> get(@PathVariable Long id) {
         // Implementação básica
-        return ResponseEntity.ok(new UserDto(id, "user" + id, "User " + id, "user" + id + "@email.com", null, null, null));
+        return ResponseEntity.ok(new UserDto(id, "user" + id, "User " + id, "user" + id + "@email.com", null, null, null, null, null, null, null, new java.util.Date(), new java.util.Date()));
     }
 
     @Override

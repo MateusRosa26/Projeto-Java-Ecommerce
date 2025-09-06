@@ -2,6 +2,7 @@ package com.ecommerce.repository;
 
 import com.ecommerce.csv.CsvUtils;
 import com.ecommerce.csv.CsvSerializable;
+import com.ecommerce.csv.EntityWithId;
 import com.ecommerce.config.Config;
 
 import java.io.IOException;
@@ -40,6 +41,7 @@ public abstract class AbstractCsvRepository<T extends CsvSerializable> {
 
     public List<T> findAll() {
         try {
+            ensureFileExists(); // Garantir que o arquivo existe antes de ler
             List<String[]> rows = CsvUtils.read(filePath.toString());
             if (rows.isEmpty()) return List.of();
             List<T> list = new ArrayList<>();
@@ -54,6 +56,7 @@ public abstract class AbstractCsvRepository<T extends CsvSerializable> {
 
     public void saveAll(List<T> entities) {
         try {
+            ensureFileExists(); // Garantir que o arquivo existe antes de escrever
             List<String[]> rows = new ArrayList<>();
             rows.add(header);
             entities.forEach(e -> rows.add(e.toCsvRow()));
@@ -65,6 +68,17 @@ public abstract class AbstractCsvRepository<T extends CsvSerializable> {
 
     public void save(T entity) {
         List<T> all = new ArrayList<>(findAll());
+        
+        // Gerar ID automaticamente se não estiver definido
+        if (entity instanceof EntityWithId entityWithId && entityWithId.getId() == 0) {
+            long maxId = all.stream()
+                    .filter(EntityWithId.class::isInstance)
+                    .mapToLong(e -> ((EntityWithId) e).getId())
+                    .max()
+                    .orElse(0L);
+            entityWithId.setId(maxId + 1);
+        }
+        
         all.add(entity);
         saveAll(all);
     }

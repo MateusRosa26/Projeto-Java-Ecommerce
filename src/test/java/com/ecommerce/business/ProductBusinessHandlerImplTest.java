@@ -4,6 +4,7 @@ import com.ecommerce.dto.ProductDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,7 @@ class ProductBusinessHandlerImplTest {
 
     @Test
     void create_ShouldCreateProduct() {
-        ProductDto product = new ProductDto(1L, "Test Product", 99.99f);
+        ProductDto product = new ProductDto(1L, "Test Product", 99.99f, "Test Description", "test.jpg", "1234567890123", true, new Date(), new Date());
         ProductDto created = handler.create(product);
         
         assertNotNull(created);
@@ -45,9 +46,9 @@ class ProductBusinessHandlerImplTest {
     @Test
     void listWithFilter_ShouldReturnFilteredResults() {
         // Criar alguns produtos primeiro
-        handler.create(new ProductDto(1L, "Teclado", 199.99f));
-        handler.create(new ProductDto(2L, "Mouse", 89.99f));
-        handler.create(new ProductDto(3L, "Monitor", 599.99f));
+        handler.create(new ProductDto(1L, "Teclado", 199.99f, "Teclado mecânico", "teclado.jpg", "1234567890123", true, new Date(), new Date()));
+        handler.create(new ProductDto(2L, "Mouse", 89.99f, "Mouse óptico", "mouse.jpg", "1234567890124", true, new Date(), new Date()));
+        handler.create(new ProductDto(3L, "Monitor", 599.99f, "Monitor LED", "monitor.jpg", "1234567890125", true, new Date(), new Date()));
 
         List<ProductDto> filtered = handler.list("nome", "teclado", false);
         assertNotNull(filtered);

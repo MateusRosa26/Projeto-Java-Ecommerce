@@ -1,12 +1,14 @@
 package com.ecommerce.business;
 
 import com.ecommerce.dto.ReportDto;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class ReportBusinessHandlerImpl implements BusinessHandler<ReportDto> {
 
     @Override
